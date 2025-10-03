@@ -5,6 +5,8 @@ import express from "express";
 // Permite que seu servidor aceite requisições de origens diferentes (outros domínios)
 import cors from "cors";
 
+import { Mongo } from "./database/mongo"; 
+
 async function main() {
     // Define o hostname (endereço do servidor)
     const hostname = "localhost";
