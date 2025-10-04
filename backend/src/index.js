@@ -5,7 +5,10 @@ import express from "express";
 // Permite que seu servidor aceite requisições de origens diferentes (outros domínios)
 import cors from "cors";
 
-import { Mongo } from "./database/mongo"; 
+import { Mongo } from "./database/mongo.js"; 
+import { config } from "dotenv"
+
+config(); // Carrega as variáveis de ambiente do arquivo .env
 
 async function main() {
     // Define o hostname (endereço do servidor)
@@ -17,6 +20,8 @@ async function main() {
     // Cria a aplicação Express
     const app = express();
 
+    const mongo_connection = await Mongo.connect({ mongo_connection_string: process.env.MONGO_CS, mongo_db_name: process.env.MONGO_DB_NAME} )
+    
     // Middleware que permite ao servidor interpretar requisições com JSON no corpo
     app.use(express.json()); 
 
