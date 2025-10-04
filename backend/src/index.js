@@ -7,6 +7,7 @@ import cors from "cors";
 
 import { Mongo } from "./database/mongo.js"; 
 import { config } from "dotenv"
+import auth_router from "./auth/auth.js";
 
 config(); // Carrega as variáveis de ambiente do arquivo .env
 
@@ -21,7 +22,7 @@ async function main() {
     const app = express();
 
     const mongo_connection = await Mongo.connect({ mongo_connection_string: process.env.MONGO_CS, mongo_db_name: process.env.MONGO_DB_NAME} )
-    
+    console.log(mongo_connection);
     // Middleware que permite ao servidor interpretar requisições com JSON no corpo
     app.use(express.json()); 
 
@@ -37,6 +38,8 @@ async function main() {
             body: "Welcome to My Story!"
         });
     });
+
+    app.use("/auth", auth_router);
 
     // Faz o servidor "escutar" na porta definida
     app.listen(port, () => {
