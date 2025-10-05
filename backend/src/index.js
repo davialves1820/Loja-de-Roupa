@@ -8,6 +8,7 @@ import cors from "cors";
 import { Mongo } from "./database/mongo.js"; 
 import { config } from "dotenv"
 import auth_router from "./auth/auth.js";
+import users_router from "./routes/users.js";
 
 config(); // Carrega as variáveis de ambiente do arquivo .env
 
@@ -45,6 +46,7 @@ async function main() {
 
     // Rota para autenticação
     app.use("/auth", auth_router); 
+    app.use("/users", users_router);
 
     // Faz o servidor "escutar" na porta definida
     app.listen(port, () => {
