@@ -167,6 +167,5 @@ auth_router.post("/login", (req, res) => {
     })(req, res);
 });
 
-
 // Exporta o roteador para uso no servidor principal
 export default auth_router;
