@@ -12,7 +12,7 @@ const collection_name = "users";
 // Configuração da Estratégia Local do Passport
 passport.use(
     new LocalStrategy.Strategy(
-        { user_name_field: "email" }, // Define o campo usado como "usuário" (email)
+        { usernameField: "email" }, // Define o campo usado como "usuário" (email)
         async (email, password, callback) => {
             // Procura o usuário no banco pelo email informado
             const user = await Mongo.db.collection(collection_name).findOne({ email: email });
@@ -23,10 +23,10 @@ passport.use(
             }
 
             // Obtém o valor do salt salvo no banco
-            const salt_buffer = user.salt.saltBuffer;
+            const saltBuffer = user.salt.buffer; 
 
             // Recalcula o hash da senha informada para comparar com a armazenada
-            crypto.pbkdf2(password, saltBuffer, 310000, 32, "sha256", (err, hashed_password) => {
+            crypto.pbkdf2(password, saltBuffer, 310000, 16, "sha256", (err, hashed_password) => {
                 if (err) {
                     // Caso ocorra erro na criptografia
                     return callback(null, false);
@@ -117,6 +117,56 @@ auth_router.post("/signup", async (req, res) => {
         }
     });
 });
+
+// Define a rota POST /login para autenticação de usuários
+auth_router.post("/login", (req, res) => {
+
+    // Usa o middleware Passport com a estratégia "local" (email e senha)
+    // A função de callback (error, user) é executada após o processo de autenticação
+    passport.authenticate("local", (error, user) => {
+
+        // Caso ocorra algum erro interno durante o processo de autenticação
+        if (error) {
+            return res.status(500).send({
+                success: false,           // Indica falha
+                statusCode: 500,          // Código HTTP 500 = erro interno
+                body: {
+                    text: "Error during authentication!",
+                    error                  // Detalhes do erro (opcional)
+                }
+            });
+        }
+        
+        // Caso o usuário não seja encontrado ou a senha esteja incorreta
+        if (!user) {
+            return res.status(400).send({
+                success: false,           // Indica falha
+                statusCode: 400,          // Código HTTP 400 = requisição inválida
+                body: {
+                    text: "User not found!"  // Mensagem genérica para não expor se foi o email ou senha
+                }
+            });
+        }
+
+        // Se chegou até aqui, o usuário foi autenticado com sucesso
+        // Cria um token JWT (JSON Web Token) com os dados do usuário autenticado
+        const token = jwt.sign(user, "secret");
+
+        // Retorna uma resposta de sucesso com o token e os dados do usuário
+        return res.status(200).send({
+            success: true,              // Indica sucesso
+            statusCode: 200,            // Código HTTP 200 = OK
+            body: {
+                text: "User authenticated successfully!",
+                user,                   // Dados do usuário autenticado
+                token                   // Token JWT gerado
+            }
+        });
+
+    // Necessário passar `req` e `res` para o passport executar o middleware corretamente
+    })(req, res);
+});
+
 
 // Exporta o roteador para uso no servidor principal
 export default auth_router;
