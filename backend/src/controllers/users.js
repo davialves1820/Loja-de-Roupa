@@ -15,4 +15,14 @@ export default class UsersControllers {
             return serverError(error);
         }
     }
+
+    async delete_user(user_id) {
+        try {
+            const result = await this.dataAccess.delete_user(user_id);
+
+            return ok(result);
+        } catch (error) {
+            return serverError(error);
+        }
+    }
 }
