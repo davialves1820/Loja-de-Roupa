@@ -1,3 +1,5 @@
+// Arquivo para padronizar as respostas HTTP da API
+
 export const ok = (body) => {
     return {
         success: true,

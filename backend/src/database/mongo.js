@@ -1,3 +1,5 @@
+// Arquivo para configurar a conexão com o banco de dados MongoDB
+
 import { MongoClient } from "mongodb"; // Ela é usada para criar e gerenciar conexões com o banco de dados MongoDB
 
 // Exporta um objeto chamado "Mongo" que conterá métodos relacionados à conexão
