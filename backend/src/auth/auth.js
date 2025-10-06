@@ -1,3 +1,5 @@
+// Arquivo para configuração de autenticação e login
+
 import express from "express";            // Criação de rotas e servidores HTTP
 import passport from "passport";          // Middleware de autenticação para Node.js
 import LocalStrategy from "passport-local"; // Estratégia de autenticação local (usuário/senha)
@@ -143,7 +145,7 @@ auth_router.post("/login", (req, res) => {
                 success: false,           // Indica falha
                 statusCode: 400,          // Código HTTP 400 = requisição inválida
                 body: {
-                    text: "User not found!"  // Mensagem genérica para não expor se foi o email ou senha
+                    text: "Credentials are not correct!"  // Mensagem genérica para não expor se foi o email ou senha
                 }
             });
         }

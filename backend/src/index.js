@@ -46,6 +46,8 @@ async function main() {
 
     // Rota para autenticação
     app.use("/auth", auth_router); 
+    
+    // Rota para gerenciamento de usuários
     app.use("/users", users_router);
 
     // Faz o servidor "escutar" na porta definida
