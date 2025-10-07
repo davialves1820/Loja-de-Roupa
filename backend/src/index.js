@@ -10,6 +10,7 @@ import { config } from "dotenv"
 import auth_router from "./auth/auth.js";
 import users_router from "./routes/users.js";
 import clothes_router from "./routes/clothes.js";
+import orders_router from "./routes/orders.js";
 
 config(); // Carrega as variáveis de ambiente do arquivo .env
 
@@ -52,6 +53,8 @@ async function main() {
     app.use("/users", users_router);
 
     app.use("/clothes", clothes_router);
+
+    app.use("/orders", orders_router);
 
     // Faz o servidor "escutar" na porta definida
     app.listen(port, () => {
