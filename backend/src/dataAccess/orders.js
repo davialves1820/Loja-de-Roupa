@@ -22,6 +22,31 @@ export default class OrdersDataAccess {
                         foreignField: "order_id",
                         as: "orderItems"
                     }
+                },
+                {
+                    $lookup: {
+                        from: "users",
+                        localField: "userId",
+                        foreignField: "_id",
+                        as: "userDetails"
+                    }
+                },
+                {
+                    $project: {
+                        "userDetails.password": 0,
+                        "userDetails.salt": 0,
+                    }
+                },
+                {
+                    $unwind: "$orderItems"
+                },
+                {
+                    $lookup: {
+                        from: "clothes",
+                        localField: "orderItems.clothes_id",
+                        foreignField: "_id",
+                        as: "orderItems.clothesDetails"
+                    }
                 }
             ])               // Busca sem filtro → retorna todos os usuários
             .toArray();              // Converte o cursor do MongoDB em um array JavaScript
