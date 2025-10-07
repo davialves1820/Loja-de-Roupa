@@ -1,0 +1,62 @@
+[
+    {
+    "name": "Camiseta Oversized de Algodão",
+    "price": 79.90,
+    "available": true,
+    "description": "Camiseta unissex feita 100% de algodão premium, com corte moderno e confortável.",
+    "ingredients": [
+        "Algodão",
+        "Tingimento ecológico"
+    ],
+    "category": "Camisetas",
+    "size": "M"
+    },
+    {
+    "name": "Calça Jeans Slim Fit",
+    "price": 149.90,
+    "available": true,
+    "description": "Calça jeans com elastano, modelagem slim e acabamento resistente.",
+    "ingredients": [
+        "Algodão",
+        "Elastano"
+    ],
+    "category": "Calças",
+    "size": "42"
+    },
+    {
+    "name": "Jaqueta de Couro Sintético",
+    "price": 299.90,
+    "available": false,
+    "description": "Jaqueta estilosa com acabamento fosco e forro interno confortável.",
+    "ingredients": [
+        "Poliuretano (PU)",
+        "Poliéster"
+    ],
+    "category": "Jaquetas",
+    "size": "G"
+    },
+    {
+    "name": "Vestido Floral Midi",
+    "price": 189.90,
+    "available": true,
+    "description": "Vestido leve com estampa floral, ideal para dias quentes.",
+    "ingredients": [
+        "Viscose",
+        "Tecido respirável"
+    ],
+    "category": "Vestidos",
+    "size": "P"
+    },
+    {
+    "name": "Tênis Casual Branco",
+    "price": 229.90,
+    "available": true,
+    "description": "Tênis confortável e versátil para o dia a dia.",
+    "ingredients": [
+        "Couro sintético",
+        "Borracha antiderrapante"
+    ],
+    "category": "Calçados",
+    "size": "41"
+    }
+]
