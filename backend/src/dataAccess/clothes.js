@@ -10,7 +10,7 @@ const collection_name = "clothes";
 // Classe responsável por manipular os dados dos usuários no banco
 export default class ClothesDataAccess {
 
-    async get_clothes() {
+    async get_orders() {
         // Acessa o banco de dados e busca todos os documentos da coleção "clothers"
         const result = await Mongo.db
             .collection(collection_name)
@@ -30,13 +30,13 @@ export default class ClothesDataAccess {
         return result; // Retorna o array de usuários
     }
 
-    async add_clother(clothesData) {
+    async add_order(clothesData) {
         const result = await Mongo.db.collection(collection_name).insertOne(clothesData);
         
         return result; // Retorna o resultado da inserção
     }
 
-    async delete_clother(clothesId) {
+    async delete_order(clothesId) {
         // Converte o ID recebido (string) em ObjectId e deleta o documento correspondente
         const result = await Mongo.db
             .collection(collection_name)
@@ -46,7 +46,7 @@ export default class ClothesDataAccess {
     }
 
 
-    async update_clothes(clothesId, clothesData) {
+    async update_order(clothesId, clothesData) {
             
         const result = await Mongo.db
             .collection(collection_name)

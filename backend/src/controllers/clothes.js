@@ -8,7 +8,7 @@ export default class ClothesControllers {
 
     async get_clothes(req, res) {
         try {
-            const clothes = await this.dataAccess.get_clothes();
+            const clothes = await this.dataAccess.get_orders();
 
             return ok(clothes);
         } catch (error) {
@@ -28,7 +28,7 @@ export default class ClothesControllers {
 
     async add_clothes(clothes_data) {
         try {
-            const result = await this.dataAccess.add_clother(clothes_data);
+            const result = await this.dataAccess.add_order(clothes_data);
 
             return ok(result);
         } catch (error) {
@@ -38,7 +38,7 @@ export default class ClothesControllers {
 
     async delete_clothes(clothes_id) {
         try {
-            const result = await this.dataAccess.delete_clother(clothes_id);
+            const result = await this.dataAccess.delete_order(clothes_id);
 
             return ok(result);
         } catch (error) {
@@ -48,7 +48,7 @@ export default class ClothesControllers {
 
     async update_clothes(clothes_id, clothes_data) {
         try {
-            const result = await this.dataAccess.update_clothes(clothes_id, clothes_data);
+            const result = await this.dataAccess.update_order(clothes_id, clothes_data);
 
             return ok(result);
         } catch (error) {
