@@ -1,3 +1,5 @@
 # Loja de Roupas
-backend: NodeJs e MongoDB
-frontend: React
+
+## ⚙️ Tecnologias
+- Backend: NodeJs e MongoDB
+- Frontend: React
