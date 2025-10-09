@@ -18,6 +18,14 @@ orders_router.get("/", async (req, res) => {
     res.status(statusCode).send({ success, statusCode, body });
 });
 
+orders_router.get("/:id", async (req, res) => {
+    // Chama o método do controller que busca os usuários
+    const { success, statusCode, body } = await orders_controller.get_orders_by_user(req.params.id);
+
+    // Envia a resposta HTTP com o status e o conteúdo retornado
+    res.status(statusCode).send({ success, statusCode, body });
+});
+
 orders_router.post("/", async (req, res) => {
     // Exibe o ID recebido no console (útil para debug)
     console.log(req.params.id);
