@@ -2,4 +2,4 @@
 
 ## ⚙️ Tecnologias
 - Backend: NodeJs e MongoDB
-- Frontend: React
+- Frontend: React e Typescript
