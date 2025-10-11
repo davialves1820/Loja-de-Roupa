@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextField, Button } from "@mui/material";
 import styles from "./page.module.css";
 import AuthServices from "../../services/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
     const [form_type, set_form_type] = useState<"login" | "signup">("login");
@@ -13,6 +14,19 @@ export default function Auth() {
     });
 
     const { login, signup, auth_loading } = AuthServices();
+
+    const navigate = useNavigate();
+    const auth_data = JSON.parse(localStorage.getItem("auth") || "{}");
+
+    useEffect(() => {
+        // The check in useEffect is mostly fine, but let's ensure 'user' exists for rendering
+        if (!!auth_data.user) {
+            console.log("DAVddI")
+            navigate("/profile");
+        }
+        console.log("DAVI")
+        
+    }, [auth_data]);
 
     // alterna entre login e signup
     const handle_change_form_type = () => {
