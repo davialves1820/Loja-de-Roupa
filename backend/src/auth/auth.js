@@ -90,6 +90,7 @@ auth_router.post("/signup", async (req, res) => {
 
         // Insere o novo usuário no banco com o email, hash da senha e salt
         const result = await Mongo.db.collection(collection_name).insertOne({
+            fullname: req.body.fullname,
             email: req.body.email,
             password: hashed_password,
             salt

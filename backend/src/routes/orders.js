@@ -18,7 +18,7 @@ orders_router.get("/", async (req, res) => {
     res.status(statusCode).send({ success, statusCode, body });
 });
 
-orders_router.get("/:id", async (req, res) => {
+orders_router.get("/userorders/:id", async (req, res) => {
     // Chama o método do controller que busca os usuários
     const { success, statusCode, body } = await orders_controller.get_orders_by_user(req.params.id);
 
