@@ -41,6 +41,8 @@ export default function Profile() {
         navigate("/");
     }
     
+    console.log(orders_list)
+
     return (
         <div>
         <h1>Welcome, {user.fullname}</h1> 
