@@ -2,8 +2,8 @@
 // e realizar operações de CRUD (Create, Read, Update, Delete) na coleção "users"
 
 import { Mongo } from "../database/mongo.js"; // Importa o módulo que gerencia a conexão com o MongoDB
-import { ObjectId } from "mongodb";           // Permite converter strings em ObjectId, usado pelo Mongo
-
+import { ObjectId, ReturnDocument } from "mongodb";           // Permite converter strings em ObjectId, usado pelo Mongo
+import { v4 as uuidv4 } from "uuid";
 // Nome da coleção do banco onde os dados dos usuários são armazenados
 const collection_name = "orders";
 
@@ -119,27 +119,30 @@ export default class OrdersDataAccess {
         return result; // Retorna o array de usuários
     }
 
+
+
     async add_order(orderData) {
         const { items, ...orderDataRest } = orderData;
+
+        // Gera referência única do Pix
+        orderDataRest.pixReference = uuidv4();
         orderDataRest.createdAt = new Date();
         orderDataRest.pickupStatus = "Pending";
         orderDataRest.userId = new ObjectId(orderDataRest.userId);
+        orderDataRest.status = "pending_payment";
 
         const new_order = await Mongo.db.collection(collection_name).insertOne(orderDataRest);
 
-        if (!new_order.insertedId) {
-            throw new Error("Failed to insert order");
-        }
-
-        items.map(item => {
+        items.forEach(item => {
             item.clothes_id = new ObjectId(item.clothes_id);
             item.order_id = new ObjectId(new_order.insertedId);
         });
 
-        const result = await Mongo.db.collection("orderItems").insertMany(items);
-        
-        return result; // Retorna o resultado da inserção
+        await Mongo.db.collection("orderItems").insertMany(items);
+
+        return new_order;
     }
+
 
     async delete_order(orderId) {
 
@@ -167,7 +170,8 @@ export default class OrdersDataAccess {
             .collection(collection_name)
             .findOneAndUpdate(
                 { _id: new ObjectId(orderId) },
-                { $set: orderData }
+                { $set: orderData },
+                { ReturnDocument: "after" }
             );
 
         // Retorna o resultado da atualização
