@@ -20,6 +20,16 @@ export default class ClothesDataAccess {
         return result; // Retorna o array de usuários
     }
 
+    async get_clothes(clothesId) {
+        // Acessa o banco de dados e busca todos os documentos da coleção "clothers"
+        const result = await Mongo.db
+            .collection(collection_name)
+            .find({clothesId})                // Busca sem filtro → retorna todos os usuários
+            .toArray();              // Converte o cursor do MongoDB em um array JavaScript
+        
+        return result; // Retorna o array de usuários
+    }
+
     async get_available_clothes() {
         // Acessa o banco de dados e busca todos os documentos da coleção "clothers"
         const result = await Mongo.db

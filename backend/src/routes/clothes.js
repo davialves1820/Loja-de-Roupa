@@ -18,6 +18,14 @@ clothes_router.get("/", async (req, res) => {
     res.status(statusCode).send({ success, statusCode, body });
 });
 
+clothes_router.get("/:id", async (req, res) => {
+    // Chama o método do controller que busca os usuários
+    const { success, statusCode, body } = await clothes_controller.get_one_clothes();
+
+    // Envia a resposta HTTP com o status e o conteúdo retornado
+    res.status(statusCode).send({ success, statusCode, body });
+});
+
 clothes_router.get("/availables/", async (req, res) => {
     // Chama o método do controller que busca os usuários
     const { success, statusCode, body } = await clothes_controller.get_available_clothes();

@@ -16,6 +16,16 @@ export default class ClothesControllers {
         }
     }
 
+    async get_one_clothes(clothes_id) {
+        try {
+            const clothes = await this.dataAccess.get_clothes(clothes_id);
+
+            return ok(clothes);
+        } catch (error) {
+            return serverError(error);
+        }
+    }
+
     async get_available_clothes(req, res) {
         try {
             const clothes = await this.dataAccess.get_available_clothes();
