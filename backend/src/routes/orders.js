@@ -26,6 +26,36 @@ orders_router.get("/userorders/:id", async (req, res) => {
     res.status(statusCode).send({ success, statusCode, body });
 });
 
+// Rota para receber notificações do Pix
+orders_router.post("/webhook/pix", async (req, res) => {
+    try {
+        const { pixKey, amount, referenceId, status } = req.body;
+
+        // status pode ser algo como "COMPLETED" ou "RECEIVED" dependendo do provedor
+        if (status === "COMPLETED" || status === "RECEIVED") {
+            // Aqui você deve localizar o pedido relacionado ao Pix
+            // Supondo que você salve a orderId na referência do Pix
+            const orderId = referenceId;
+
+            const { success, statusCode, body } =
+                await orders_controller.update_order(orderId, {
+                    status: "paid",
+                    paymentConfirmedAt: new Date(),
+                    paymentMethod: "pix"
+                });
+
+            console.log("Pedido atualizado automaticamente via Webhook:", orderId);
+        }
+
+        // Sempre responda 200 para que o provedor saiba que recebeu
+        res.status(200).json({ success: true });
+    } catch (err) {
+        console.error("Erro no webhook Pix:", err);
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
+
 orders_router.post("/", async (req, res) => {
     // Exibe o ID recebido no console (útil para debug)
     console.log(req.params.id);
@@ -48,6 +78,19 @@ orders_router.delete("/:id", async (req, res) => {
     res.status(statusCode).send({ success, statusCode, body });
 });
 
+// Confirmar pagamento
+orders_router.put("/confirm/:id", async (req, res) => {
+    console.log("Confirmando pagamento do pedido:", req.params.id);
+
+    const { success, statusCode, body } =
+        await orders_controller.update_order(req.params.id, {
+        status: "paid",
+        paymentConfirmedAt: new Date(),
+        });
+
+    res.status(statusCode).send({ success, statusCode, body });
+});
+
 
 orders_router.put("/:id", async (req, res) => {
     // Exibe o ID recebido no console (útil para debug)
@@ -62,3 +105,4 @@ orders_router.put("/:id", async (req, res) => {
 
 // Exporta o roteador para ser usado no arquivo principal
 export default orders_router;
+
