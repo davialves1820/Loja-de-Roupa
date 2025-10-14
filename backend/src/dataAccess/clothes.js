@@ -10,11 +10,11 @@ const collection_name = "clothes";
 // Classe responsável por manipular os dados dos usuários no banco
 export default class ClothesDataAccess {
 
-    async get_orders() {
+    async get_all_orders() {
         // Acessa o banco de dados e busca todos os documentos da coleção "clothers"
         const result = await Mongo.db
             .collection(collection_name)
-            .find({ available: true })                // Busca sem filtro → retorna todos os usuários
+            .find({})                // Busca sem filtro → retorna todos os usuários
             .toArray();              // Converte o cursor do MongoDB em um array JavaScript
         
         return result; // Retorna o array de usuários
@@ -34,7 +34,7 @@ export default class ClothesDataAccess {
         // Acessa o banco de dados e busca todos os documentos da coleção "clothers"
         const result = await Mongo.db
             .collection(collection_name)
-            .find({})                // Busca sem filtro → retorna todos os usuários
+            .find({ available: true })                // Busca sem filtro → retorna todos os usuários
             .toArray();              // Converte o cursor do MongoDB em um array JavaScript
         
         return result; // Retorna o array de usuários
