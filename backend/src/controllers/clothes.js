@@ -8,7 +8,7 @@ export default class ClothesControllers {
 
     async get_clothes(req, res) {
         try {
-            const clothes = await this.dataAccess.get_all_orders();
+            const clothes = await this.dataAccess.get_all_clothes();
 
             return ok(clothes);
         } catch (error) {
@@ -19,7 +19,7 @@ export default class ClothesControllers {
     async get_one_clothes(clothes_id) {
         try {
             const clothes = await this.dataAccess.get_clothes(clothes_id);
-
+            
             return ok(clothes);
         } catch (error) {
             return serverError(error);
@@ -29,9 +29,10 @@ export default class ClothesControllers {
     async get_available_clothes(req, res) {
         try {
             const clothes = await this.dataAccess.get_available_clothes();
-
+            
             return ok(clothes);
         } catch (error) {
+            
             return serverError(error);
         }
     }
