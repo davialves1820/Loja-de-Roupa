@@ -18,10 +18,7 @@ export const Home = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        >
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroImage})` }}>
           <div className="absolute inset-0 bg-gradient-to-b from-background/20 to-background/80" />
         </div>
         
@@ -67,8 +64,8 @@ export const Home = () => {
       <section className="container mx-auto px-4 py-24">
         <h2 className="font-serif text-4xl font-bold mb-12 text-center">Categorias</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {['Camisas', 'Calças', 'Vestidos'].map((category) => (
-            <Link key={category} to={`/products?category=${category}`} className="group">
+          {['Shorts', 'Calças', 'Blusas'].map((category) => (
+            <Link key={category} to={`/clothes?category=${category}`} className="group">
               <div className="relative aspect-square rounded-lg overflow-hidden bg-muted">
                 <img 
                   src="/placeholder.svg" 
