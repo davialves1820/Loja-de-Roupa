@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Product } from '@/services/clothes';
+import { Product } from '../components/Product';
 import { Card, CardContent } from '@/components/card';
 
 interface ProductCardProps {
@@ -7,17 +7,23 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
+  // Verifica se alguma variação está em estoque
+  const inStock = product.variations?.some(v => v.stock > 0);
+
+  // Pega a primeira imagem, se for array
+  const productImage = Array.isArray(product.image) ? product.image[0] : product.image;
+
   return (
     <Link to={`/clothes/${product.id}`} className="group">
       <Card className="border-0 shadow-none bg-transparent overflow-hidden">
         <CardContent className="p-0">
           <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-muted mb-4">
             <img
-              src={product.images[0]}
+              src={productImage}
               alt={product.name}
               className="w-full h-full object-cover transition-smooth group-hover:scale-105"
             />
-            {!product.inStock && (
+            {!inStock && (
               <div className="absolute inset-0 bg-background/60 flex items-center justify-center">
                 <span className="text-sm font-medium">Esgotado</span>
               </div>

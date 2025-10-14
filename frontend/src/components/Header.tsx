@@ -15,7 +15,7 @@ export const Header = () => {
           </Button>
 
           <Link to="/" className="text-2xl font-serif font-bold tracking-tight">
-            ATELIER
+            XPG
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">

@@ -4,7 +4,7 @@ import { Button } from '@/components/button';
 import { ProductCard } from '@/components/ProductCard';
 import { getProducts } from '@/services/clothes';
 import { useQuery } from '@tanstack/react-query';
-import heroImage from '@/assets/hero-image.jpg';
+import heroImage from '../assets/hero-image.jpg';
 
 export const Home = () => {
   const { data: products = [] } = useQuery({

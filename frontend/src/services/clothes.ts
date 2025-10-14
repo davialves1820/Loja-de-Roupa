@@ -22,7 +22,7 @@ export const getProducts = async (): Promise<Product[]> => {
     category: item.category,
     inStock: item.variations?.some((v: any) => v.stock > 0) || false,
     variations: item.variations || [],
-    images: item.images && item.images.length > 0 ? item.images : ["/placeholder.jpg"],
+    image: item.image && item.image.length > 0 ? item.image : ["/placeholder.jpg"],
   }));
 };
 
@@ -34,11 +34,12 @@ export const getProductById = async (id: string): Promise<Product> => {
 
   const data = await res.json();
 
-  if (!data.success || !data.body?.length) {
+  console.log(data.body)
+  if (!data.success) {
     throw new Error("Produto não encontrado");
   }
 
-  const item = data.body[0];
+  const item = data.body;
 
   return {
     id: item._id,
@@ -48,6 +49,6 @@ export const getProductById = async (id: string): Promise<Product> => {
     category: item.category,
     inStock: item.variations?.some((v: any) => v.stock > 0) || false,
     variations: item.variations || [],
-    images: item.images && item.images.length > 0 ? item.images : ["/placeholder.jpg"],
+    image: item.image && item.image.length > 0 ? item.image : ["/placeholder.jpg"],
   };
 };

@@ -42,6 +42,7 @@ export const Clothes = () => {
 
   const categories = ['Todos', ...Array.from(new Set(products.map(p => p.category)))];
 
+  console.log(products);
   return (
     <div className="min-h-screen py-12">
       <div className="container mx-auto px-4">

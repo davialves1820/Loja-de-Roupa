@@ -116,7 +116,7 @@ const statusConfig: Record<string, { label: string; icon: any; className: string
             ) : (
                 orders_list.map((order: any) => {
                 const status = statusConfig[order.pickupStatus] || statusConfig.Pending;
-                console.log(order.orderItems?.[0].clothesDetails?.[0].name)
+                console.log(order.orderItems?.[0])
                 const StatusIcon = status.icon;
 
                 return (

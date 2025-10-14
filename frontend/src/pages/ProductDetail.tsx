@@ -18,6 +18,8 @@ export const ProductDetail = () => {
     queryFn: () => getProductById(id!),
   });
 
+  console.log(product);
+
   if (isLoading) return <div className="min-h-screen flex items-center justify-center">Carregando...</div>;
   if (!product) return (
     <div className="min-h-screen flex flex-col items-center justify-center">
@@ -28,10 +30,8 @@ export const ProductDetail = () => {
     </div>
   );
 
-  // Encontrar variação selecionada
   const selectedVariation = product.variations.find(v => v.size === selectedSize);
   const inStock = selectedVariation?.stock > 0;
-  console.log(inStock)
 
   const handleAddToCart = () => {
     if (!selectedSize) {
@@ -47,7 +47,7 @@ export const ProductDetail = () => {
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.images[0],
+      image: Array.isArray(product.image) ? product.image[0] : product.image,
       size: selectedSize,
     });
 
@@ -64,11 +64,17 @@ export const ProductDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Imagens */}
           <div className="space-y-4">
-            {product.images.map((img, idx) => (
-              <div key={idx} className="aspect-square rounded-lg overflow-hidden bg-muted">
-                <img src={img} alt={product.name} className="w-full h-full object-cover" />
+            {Array.isArray(product.image) ? (
+              product.image.map((img, idx) => (
+                <div key={idx} className="aspect-square rounded-lg overflow-hidden bg-muted">
+                  <img src={img} alt={product.name} className="w-full h-full object-cover" />
+                </div>
+              ))
+            ) : (
+              <div className="aspect-square rounded-lg overflow-hidden bg-muted">
+                <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
               </div>
-            ))}
+            )}
           </div>
 
           {/* Informações */}
