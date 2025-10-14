@@ -8,7 +8,7 @@ export default class ClothesControllers {
 
     async get_clothes(req, res) {
         try {
-            const clothes = await this.dataAccess.get_orders();
+            const clothes = await this.dataAccess.get_all_orders();
 
             return ok(clothes);
         } catch (error) {
