@@ -5,7 +5,7 @@ export default function OrderServices() {
     const [refetch_orders, set_refetch_orders] = useState(true);
     const [orders_list, set_orders_list] = useState([]);
 
-    const url = "http://localhost:3000/orders";
+    const url = "https://loja-de-roupa.onrender.com/orders";
 
     // 🔹 Buscar pedidos do usuário
     const get_user_orders = async (user_id: any) => {

@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function AuthServices() {
     const [auth_loading, set_auth_loading] = useState(false);
 
-    const url = "http://localhost:3000/auth";
+    const url = "https://loja-de-roupa.onrender.com/auth";
 
     const login = async (form_data: any) => {
         set_auth_loading(true);

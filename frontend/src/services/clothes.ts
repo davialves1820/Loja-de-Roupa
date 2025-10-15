@@ -1,6 +1,6 @@
 import { Product } from "@/components/Product";
 
-const API_URL = "http://localhost:3000/clothes";
+const API_URL = "https://loja-de-roupa.onrender.com/clothes";
 
 // Buscar todas as roupas disponíveis
 export const getProducts = async (): Promise<Product[]> => {
