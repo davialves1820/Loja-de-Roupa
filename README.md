@@ -177,6 +177,11 @@ JWT_SECRET=sua_chave_secreta
 
 ---
 
+## 🌐 Projeto hospedado
+[loja-de-roupa-six.vercel.app](https://loja-de-roupa-six.vercel.app)
+
+---
+
 ## 📜 Licença
 
 Este projeto está licenciado sob a **MIT License** — veja o arquivo [LICENSE](LICENSE) para mais detalhes.
