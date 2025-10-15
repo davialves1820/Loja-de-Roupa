@@ -178,7 +178,8 @@ JWT_SECRET=sua_chave_secreta
 ---
 
 ## 🌐 Projeto hospedado
-[loja-de-roupa-six.vercel.app]([https://loja-de-roupa-six.vercel.app](https://loja-de-roupa-git-main-davialves1820s-projects.vercel.app/))
+
+[loja-de-roupa-six.vercel.app]([https://loja-de-roupa-six.vercel.app](https://loja-de-roupa-git-main-davialves1820s-projects.vercel.app))
 
 ---
 
